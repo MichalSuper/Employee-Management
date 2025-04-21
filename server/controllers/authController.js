@@ -1,5 +1,5 @@
 import pool from '../db.js';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { generateToken } from '../utils/generateToken.js';
 
 export const register = async (req, res) => {
