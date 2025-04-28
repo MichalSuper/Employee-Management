@@ -123,3 +123,44 @@ export const deleteEmployee = async (req, res) => {
     res.status(500).json({ error: 'Error deleting employee' });
   }
 };
+
+export const completeProfile = async (req, res) => {
+  const {
+    first_name,
+    last_name,
+    email,
+    phone,
+    address,
+    birth_date,
+    start_date,
+    job_id
+  } = req.body;
+
+  const userId = req.user.id; 
+
+  try {
+    const checkEmployee = await pool.query(`
+      SELECT * FROM employees WHERE user_id = $1
+    `, [userId]);
+
+    if (checkEmployee.rows.length > 0) {
+      return res.status(400).json({ error: 'Profile already completed' });
+    }
+
+    const result = await pool.query(`
+      INSERT INTO employees 
+      (first_name, last_name, email, phone, address, birth_date, start_date, job_id, user_id)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+      RETURNING *
+    `, [
+      first_name, last_name, email, phone, address,
+      birth_date, start_date, job_id, userId
+    ]);
+
+    res.status(201).json(result.rows[0]);
+  } catch (err) {
+    console.error('Error completing profile:', err);
+    res.status(500).json({ error: 'Error completing profile' });
+  }
+};
+
