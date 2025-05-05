@@ -164,3 +164,31 @@ export const completeProfile = async (req, res) => {
   }
 };
 
+export const getEmployeeByUserId = async (req, res) => {
+  const userId = req.user.id; 
+
+  try {
+    const result = await pool.query(`
+      SELECT employees.*, jobs.title AS job_title, users.email AS user_email 
+      FROM employees
+      LEFT JOIN jobs ON employees.job_id = jobs.id
+      LEFT JOIN users ON employees.user_id = users.id
+      WHERE employees.user_id = $1
+    `, [userId]);
+
+    const employee = result.rows[0];
+
+    if (!employee) {
+      return res.status(404).json({ error: 'Employee not found' });
+    }
+
+    res.json(employee);
+  } catch (err) {
+    console.error('Error retrieving employee by user ID:', err);
+    res.status(500).json({ error: 'Error retrieving employee data' });
+  }
+};
+
+
+
+

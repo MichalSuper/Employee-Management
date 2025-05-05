@@ -5,7 +5,8 @@ import {
   createEmployee,
   updateEmployee,
   deleteEmployee,
-  completeProfile
+  completeProfile,
+  getEmployeeByUserId
 } from '../controllers/employeeController.js';
 
 import authMiddleware from '../middleware/authMiddleware.js';
@@ -15,8 +16,10 @@ const router = express.Router();
 
 router.use(authMiddleware);
 
+router.get('/by-user', getEmployeeByUserId);
 router.get('/:id', getEmployeeById);
 router.post('/complete-profile', completeProfile);
+
 
 router.get('/', adminMiddleware, getAllEmployees);
 router.post('/', adminMiddleware, createEmployee);
