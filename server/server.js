@@ -8,7 +8,7 @@ import employeeRoutes from './routes/employeeRoutes.js';
 dotenv.config();
 const app = express();
 app.use(cors({
-    origin: 'http://employee-management-nine-mauve.vercel.app',
+    origin: 'employee-management-git-main-michals-projects-d12c47fd.vercel.app',
     credentials: true,
 }));
 app.use(express.json());
