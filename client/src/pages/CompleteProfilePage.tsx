@@ -31,7 +31,7 @@ interface CompleteProfileInputs {
 
 interface Job {
   id: number;
-  name: string;
+  title: string;
 }
 
 export default function CompleteProfilePage() {
@@ -166,8 +166,8 @@ export default function CompleteProfilePage() {
               {...register('job_id', { required: 'Required field' })}
             >
               {jobs.map((job) => (
-                <MenuItem key={job.id} value={job.id}>
-                  {job.name}
+                <MenuItem key={job.id} value={job.id.toString()}>
+                  {job.title}
                 </MenuItem>
               ))}
             </Select>

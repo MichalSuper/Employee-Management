@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ModalWindow from '../components/ModalWindow';
 import { addEmployee } from '../api/employee';
 import { getJobs } from '../api/job';
-import { Button, TextField, MenuItem } from '@mui/material';
+import { Button, TextField, MenuItem, Box } from '@mui/material';
 
 interface AddEmployeeModalProps {
   open: boolean;
@@ -57,29 +57,66 @@ const AddEmployeeModal: React.FC<AddEmployeeModalProps> = ({ open, onClose, toke
 
   return (
     <ModalWindow open={open} onClose={onClose}>
-      <div className="grid gap-2">
-        <TextField label="First Name" name="first_name" value={formData.first_name} onChange={handleChange} />
-        <TextField label="Last Name" name="last_name" value={formData.last_name} onChange={handleChange} />
-        <TextField label="Email" name="email" value={formData.email} onChange={handleChange} />
-        <TextField label="Phone" name="phone" value={formData.phone || ''} onChange={handleChange} />
-        <TextField label="Address" name="address" value={formData.address || ''} onChange={handleChange} />
-        <TextField
-          label="Birth Date"
-          name="birth_date"
-          type="date"
-          InputLabelProps={{ shrink: true }}
-          value={formData.birth_date || ''}
-          onChange={handleChange}
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <TextField 
+          fullWidth
+          label="First Name" 
+          name="first_name" 
+          value={formData.first_name} 
+          onChange={handleChange} 
         />
-        <TextField
-          label="Start Date"
-          name="start_date"
-          type="date"
-          InputLabelProps={{ shrink: true }}
-          value={formData.start_date || ''}
-          onChange={handleChange}
+        <TextField 
+          fullWidth
+          label="Last Name" 
+          name="last_name" 
+          value={formData.last_name} 
+          onChange={handleChange} 
         />
+        <TextField 
+          fullWidth
+          label="Email" 
+          name="email" 
+          value={formData.email} 
+          onChange={handleChange} 
+        />
+        <TextField 
+          fullWidth
+          label="Phone" 
+          name="phone" 
+          value={formData.phone || ''} 
+          onChange={handleChange} 
+        />
+        <TextField 
+          fullWidth
+          label="Address" 
+          name="address" 
+          value={formData.address || ''} 
+          onChange={handleChange} 
+        />
+        
+        <Box sx={{ display: 'flex', gap: 2 }}>
+          <TextField
+            fullWidth
+            label="Birth Date"
+            name="birth_date"
+            type="date"
+            InputLabelProps={{ shrink: true }}
+            value={formData.birth_date || ''}
+            onChange={handleChange}
+          />
+          <TextField
+            fullWidth
+            label="Start Date"
+            name="start_date"
+            type="date"
+            InputLabelProps={{ shrink: true }}
+            value={formData.start_date || ''}
+            onChange={handleChange}
+          />
+        </Box>
+        
         <TextField
+          fullWidth
           select
           label="Job"
           name="job_id"
@@ -90,8 +127,17 @@ const AddEmployeeModal: React.FC<AddEmployeeModalProps> = ({ open, onClose, toke
             <MenuItem key={job.id} value={job.id}>{job.title}</MenuItem>
           ))}
         </TextField>
-        <Button onClick={handleSubmit} variant="contained">Add</Button>
-      </div>
+        
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 1 }}>
+          <Button 
+            onClick={handleSubmit} 
+            variant="contained" 
+            color="success"
+          >
+            ADD
+          </Button>
+        </Box>
+      </Box>
     </ModalWindow>
   );
 };

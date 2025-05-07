@@ -19,6 +19,12 @@ const ViewEmployeeModal: React.FC<ViewEmployeeModalProps> = ({ open, onClose, em
     }
   }, [open, employeeId, token]);
 
+  const formatDate = (dateString?: string) => {
+    if (!dateString) return 'N/A';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-GB'); // dd/mm/yyyy
+  };
+
   if (!employee) return null;
 
   return (
@@ -29,8 +35,8 @@ const ViewEmployeeModal: React.FC<ViewEmployeeModalProps> = ({ open, onClose, em
         <p><strong>Email:</strong> {employee.email}</p>
         <p><strong>Phone:</strong> {employee.phone || '-'}</p>
         <p><strong>Address:</strong> {employee.address || '-'}</p>
-        <p><strong>Birth Date:</strong> {employee.birth_date || '-'}</p>
-        <p><strong>Start Date:</strong> {employee.start_date || '-'}</p>
+        <p><strong>Birth Date:</strong> {formatDate(employee.birth_date)}</p>
+        <p><strong>Start Date:</strong> {formatDate(employee.start_date)}</p>
         <p><strong>Job:</strong> {employee.job_title || '-'}</p>
       </div>
     </ModalWindow>

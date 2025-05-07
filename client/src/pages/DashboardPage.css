@@ -1,0 +1,45 @@
+/* Optional additional styles */
+/* These styles complement the inline styling in the component */
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f5f8f5;
+  }
+  
+  /* Add slight transition effects */
+  .MuiPaper-root, 
+  .MuiButton-root,
+  .MuiIconButton-root,
+  .MuiAvatar-root {
+    transition: all 0.2s ease-in-out !important;
+  }
+  
+  /* Nicer hover effect for paper components */
+  .MuiPaper-root:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+  }
+  
+  /* Custom scrollbar for browsers that support it */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #81c784;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #66bb6a;
+  }
+  
+  /* Remove focus outline and replace with subtle green glow */
+  *:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.3);
+  }
