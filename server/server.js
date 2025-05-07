@@ -7,10 +7,22 @@ import employeeRoutes from './routes/employeeRoutes.js';
 
 dotenv.config();
 const app = express();
-app.use(cors({
-    origin: 'http://employee-management-git-main-michals-projects-d12c47fd.vercel.app',
+const allowedOrigins = [
+    'https://employee-management-nine-mauve.vercel.app', 
+    'https://employee-management-git-main-michals-projects-d12c47fd.vercel.app', 
+    'http://localhost:5173', 
+  ];
+  
+  app.use(cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true,
-}));
+  }));
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
